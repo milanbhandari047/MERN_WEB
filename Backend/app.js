@@ -1,17 +1,24 @@
-const express = require("express")
-const app = express()
+const express = require("express");
+const app = express();
 
-require("dotenv").config()
+const { connectDatabase } = require("./database/database");
+const router = require("./routes/auth/authRoute");
 
-app.get("/",(req,res)=>{
-    res.status(200).json({
-        message:"Server is running"
-    })
-})
+require("dotenv").config();
+
+//Database connection
+connectDatabase(process.env.MONGO_URI);
+
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
+
+app.use("/api/auth", router);
 
 
 
-const PORT = process.env.PORT
-app.listen(PORT,()=>{
-    console.log(`Server is running at PORT ${PORT}`)
-})
+
+const PORT = process.env.PORT;
+app.listen(PORT, () => {
+  console.log(`Server is running at PORT ${PORT}`);
+});
