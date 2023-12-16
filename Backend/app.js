@@ -9,6 +9,7 @@ require("dotenv").config();
 //Database connection
 connectDatabase(process.env.MONGO_URI);
 
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
