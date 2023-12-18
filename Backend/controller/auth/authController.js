@@ -1,5 +1,5 @@
 const User = require("../../model/userModel");
-const bcrypt = require("bcryptjs");
+
 
 //Home page
 exports.home = async (req, res) => {
@@ -22,9 +22,13 @@ exports.register = async (req, res) => {
       });
     }
 
-    await User.create({ username, email, phone, password });
+    const userCreated = await User.create({ username, email, phone, password });
 
-    res.status(200).json({ message: "User register successfully" });
+    res.status(201).json({
+      message: "User register successfully",
+      token: await userCreated.generateToken(),
+      userId: userCreated._id.toString()
+    });
   } catch (error) {
     res.status(500).json("Internal Server Error");
   }
