@@ -2,7 +2,8 @@ const express = require("express");
 const app = express();
 
 const { connectDatabase } = require("./database/database");
-const router = require("./routes/auth/authRoute");
+const authRoute = require("./routes/auth/authRoute");
+const contactRoute = require("./routes/contact/contactRoute")
 const errorMiddleware = require("./middlewares/errorMiddleware");
 
 require("dotenv").config();
@@ -15,8 +16,8 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 
-app.use("/api/auth", router);
-
+app.use("/api/auth", authRoute);
+app.use("/api/form",contactRoute)
 
 app.use(errorMiddleware)
 
