@@ -29,7 +29,7 @@ const Login = () => {
             <div className="container grid grid-two-cols">
               <div className="registration-image">
                 <img
-                  src="../../public/images/register.jpg"
+                  src="images/register.jpg"
                   alt="a man is trying to do registration "
                   width={400}
                   height={400}
